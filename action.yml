@@ -24,7 +24,7 @@ outputs:
     description: >-
       The path to the file containing the commit logs for the release.
       The logs are formatted as yaml in the format of 'hash: %H%nmessage: | %n %s%n%n %b%n---'.
-    value: ${{ steps.calc-version.outputs.commits-file-path }}
+    value: ${{ steps.calc-version.outputs.commit-logs-path }}
   release-ref:
     description: 'The commit SHA to the release'
     value: ${{ steps.calc-version.outputs.release-ref }}

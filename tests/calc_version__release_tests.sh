@@ -130,6 +130,10 @@ test_commit_count() {
     assertEquals "Should have calculated commit count" 3 "$TBV_COMMIT_COUNT"
 }
 
+test_commit_logs_path() {
+    assertTrue "Should have written commit logs to file" '[ -r "$TBV_COMMIT_LOGS_PATH" ]'
+}
+
 # Remove all arguments this file was called with before calling shunit2 or it will throw
 shift $#
 . shunit2
