@@ -25,7 +25,7 @@ git() {
             echo "7c72ed06a8e21b2dc2c4a5d6b769ec5686170609"
             ;;
         "log e0b83ea6577431c046bcb35ba49f8630009cd83c -1 --pretty=format:hash: %H%nmessage: | %n %s%n%n %b%n---")
-            cat << EOF
+            head -c -1 <<EOF
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
     Merge pull request #1 from foo/bar
@@ -106,7 +106,7 @@ test_release_ref() {
 }
 
 test_release_notes() {
-    assertEquals "Should have generated commit logs for the release" "$(cat tbv_commit_logs.txt)" \
+    assertEquals "Should have generated commit logs for the release" \
 "$(cat << EOF 
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
@@ -122,7 +122,8 @@ message: |
 
 ---
 EOF
-)"
+)" \
+"$(cat tbv_commit_logs.txt)" 
 }
 
 test_commit_count() {

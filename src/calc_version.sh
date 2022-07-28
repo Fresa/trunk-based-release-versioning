@@ -56,6 +56,7 @@ if [ "$current_branch" == "$default_branch" ]; then
   if [ $(git rev-parse --verify $release_ref^2 2> /dev/null) ]; then
     to_ref=$(git rev-parse $release_ref^2)
     git log $release_ref -1 --pretty=format:"$log_format" >> tbv_commit_logs.txt
+    echo >> tbv_commit_logs.txt
     commit_count=1
     echo "Release ref is a merge commit with child commit $to_ref"
   else
