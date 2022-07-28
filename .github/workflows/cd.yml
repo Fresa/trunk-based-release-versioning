@@ -39,7 +39,15 @@ jobs:
         id: convert-commit-logs
         uses: mikefarah/yq@v4.25.2
         with:
-          cmd: yq ea -o=json 'select(. != null) | [.]' '${{ steps.versioning.outputs.commit-logs-path }}' | tee commit_logs.json
+          cmd: yq ea -o=json 'select(. != null) | [.]' '${${{ steps.versioning.outputs.commit-logs-path }}/#${{ github.workspace }}/\.}' | tee commit_logs.json
+      - name: Generate Release Notes
+        id: release_notes
+        uses: Fresa/release-notes-generator@v1
+        with:
+            version: ${{ steps.release-tag.outputs.tag }}
+            last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
+            release_ref: ${{ steps.versioning.outputs.release-ref }}
+            path_to_commits: ./commit_logs.json
       - name: Create Tag
         uses: actions/github-script@v3
         with:
@@ -50,14 +58,6 @@ jobs:
               ref: "refs/tags/${{ steps.release-tag.outputs.tag }}",
               sha: "${{ steps.versioning.outputs.release-ref }}"
             });
-      - name: Generate Release Notes
-        id: release_notes
-        uses: Fresa/release-notes-generator@v1
-        with:
-            version: ${{ steps.release-tag.outputs.tag }}
-            last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
-            release_ref: ${{ steps.versioning.outputs.release-ref }}
-            path_to_commits: ./commit_logs.json
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
