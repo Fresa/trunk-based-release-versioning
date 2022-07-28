@@ -34,12 +34,15 @@ jobs:
             tag="$tag-pre-$(echo ${{ steps.versioning.outputs.release-ref }} | cut -c1-8)"
           fi
 
+          echo "Commit logs:"
+          cat ./tbv_commit_logs.txt
+
           echo "::set-output name=tag::$tag"
       - name: Convert Commit Logs to JSON
         id: convert-commit-logs
         uses: mikefarah/yq@v4.25.2
         with:
-          cmd: yq ea -o=json 'select(. != null) | [.]' $(echo "'${{ steps.versioning.outputs.commit-logs-path }}'" | sed "s|^'${{ github.workspace }}|'.|") | tee commit_logs.json
+          cmd: yq ea -o=json 'select(. != null) | [.]' $(echo "'${{ steps.versioning.outputs.commit-logs-path }}'" | sed "s|^'${{ github.workspace }}/|'|") | tee commit_logs.json
       - name: Generate Release Notes
         id: release_notes
         uses: Fresa/release-notes-generator@v1
