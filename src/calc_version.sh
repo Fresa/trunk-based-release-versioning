@@ -98,6 +98,8 @@ echo "last release ref: $last_release_ref"
   revision_range="$to_ref" || \
   revision_range="$from_ref..$to_ref"
 git log $revision_range --first-parent --pretty=format:"$log_format" >> tbv_commit_logs.txt
+commit_logs_path="$(realpath .)/tbv_commit_logs.txt"
+echo "wrote commit logs to $commit_logs_path"
 commit_count=$(($(git rev-list $revision_range --first-parent --count)+$commit_count))
 
 echo "is pre-release: $is_prerelease"
@@ -115,3 +117,4 @@ export TBV_MAJOR_VERSION=${version_components[0]}
 export TBV_MINOR_VERSION=${version_components[1]}
 export TBV_PATCH_VERSION=${version_components[2]}
 export TBV_COMMIT_COUNT=$commit_count
+export TBV_COMMIT_LOGS_PATH=$commit_logs_path

@@ -18,9 +18,9 @@ outputs:
     description: 'Is this a prerelease?'
     value: ${{ steps.calc-version.outputs.is-prerelease }}
   commit-count:
-    description: 'Number of commits the calculated version consists off'
+    description: 'Number of commits the release consists off'
     value: ${{ steps.calc-version.outputs.commit-count }}
-  commits-file-path:
+  commit-logs-path:
     description: >-
       The path to the file containing the commit logs for the release.
       The logs are formatted as yaml in the format of 'hash: %H%nmessage: | %n %s%n%n %b%n---'.
@@ -43,7 +43,7 @@ runs:
       echo "::set-output name=minor-version::$(echo $TBV_MINOR_VERSION)"
       echo "::set-output name=patch-version::$(echo $TBV_PATCH_VERSION)"
       echo "::set-output name=commit-count::$(echo $TBV_COMMIT_COUNT)"
-      echo "::set-output name=commits-file-path::${{ github.action_path }}/tbv_commit_logs.txt"
+      echo "::set-output name=commit-logs-path::$(echo $TBV_COMMIT_LOGS_PATH)"
       echo "::set-output name=release_ref::$(echo $TBV_RELEASE_REF)"
       echo "::set-output name=last_release_ref::$(echo $TBV_LAST_RELEASE_REF)"
     shell: bash
