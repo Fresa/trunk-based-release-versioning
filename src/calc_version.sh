@@ -34,9 +34,9 @@ get_previous_version_and_release_ref() {
     exit 1
   fi
   cat < /dev/stdin | \
-    grep -o 'tag: v[^,)]\+' || [[ $? == 1 ]] | \
+    { grep -o 'tag: v[^,)]\+' || test $? = 1; } | \
     sed 's/^tag: v//' | \
-    grep '^[0-9]*\.[0-9]*\.[0-9]*[[:space:]]' || [[ $? == 1 ]] | \
+    { grep '^[0-9]*\.[0-9]*\.[0-9]*[[:space:]]' || test $? = 1; } | \
     head -1 
 }
 
