@@ -39,7 +39,7 @@ jobs:
         id: convert-commit-logs
         uses: mikefarah/yq@v4.25.2
         with:
-          cmd: yq ea -o=json 'select(. != null) | [.]' ${{ steps.versioning.outputs.commits-file-path }} | tee commit_logs.json
+          cmd: yq ea -o=json 'select(. != null) | [.]' '${{ steps.versioning.outputs.commit-logs-path }}' | tee commit_logs.json
       - name: Create Tag
         uses: actions/github-script@v3
         with:
