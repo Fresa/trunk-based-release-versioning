@@ -48,7 +48,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: "refs/tags/${{ steps.release-tag.outputs.tag }}",
-              sha: "${{ steps.versioning.outputs.release_ref }}"
+              sha: "${{ steps.versioning.outputs.release-ref }}"
             });
       - name: Generate Release Notes
         id: release_notes

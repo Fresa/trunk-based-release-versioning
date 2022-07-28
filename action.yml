@@ -27,10 +27,10 @@ outputs:
     value: ${{ steps.calc-version.outputs.commits-file-path }}
   release-ref:
     description: 'The commit SHA to the release'
-    value: ${{ steps.calc-version.outputs.release_ref }}
+    value: ${{ steps.calc-version.outputs.release-ref }}
   last-release-ref:
     description: 'The commit SHA to the last release'
-    value: ${{ steps.calc-version.outputs.last_release_ref }}
+    value: ${{ steps.calc-version.outputs.last-release-ref }}
 runs:
   using: 'composite'
   steps:
@@ -46,8 +46,8 @@ runs:
       echo "::set-output name=patch-version::$(echo $TBV_PATCH_VERSION)"
       echo "::set-output name=commit-count::$(echo $TBV_COMMIT_COUNT)"
       echo "::set-output name=commit-logs-path::$(echo $TBV_COMMIT_LOGS_PATH)"
-      echo "::set-output name=release_ref::$(echo $TBV_RELEASE_REF)"
-      echo "::set-output name=last_release_ref::$(echo $TBV_LAST_RELEASE_REF)"
+      echo "::set-output name=release-ref::$(echo $TBV_RELEASE_REF)"
+      echo "::set-output name=last-release-ref::$(echo $TBV_LAST_RELEASE_REF)"
     shell: bash
 branding:
   icon: 'tag'
