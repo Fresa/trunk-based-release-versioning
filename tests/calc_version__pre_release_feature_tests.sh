@@ -34,17 +34,17 @@ message: |
 ---
 EOF
             ;;
-        "log e0b83ea6577431c046bcb35ba49f8630009cd83c..master --first-parent --format=format:%D %H --simplify-by-decoration --merges")
-            echo "master 3b9fdcac8d57edb8785b8408eb4ffbe10bbef1d9"
-            echo "origin/master fcfd6fa79d2588039b54c776650a47a0ca8df718"
+        "log e0b83ea6577431c046bcb35ba49f8630009cd83c..master --first-parent --format=format:%D, %H --simplify-by-decoration --merges")
+            echo "master, 3b9fdcac8d57edb8785b8408eb4ffbe10bbef1d9"
+            echo "origin/master, fcfd6fa79d2588039b54c776650a47a0ca8df718"
             ;;
-        "log e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --format=format:%D %H --simplify-by-decoration")
-            echo "master 3b9fdcac8d57edb8785b8408eb4ffbe10bbef1d9"
-            echo "origin/master fcfd6fa79d2588039b54c776650a47a0ca8df718"
-            echo "tag: sometag eb89187b10b70f4f9532d94613cfff01bec3ac33"
-            echo "tag: v1.2.0 7c72ed06a8e21b2dc2c4a5d6b769ec5686170609"
-            echo "tag: v1.2.0-mybranch.1-2 a0b120b7d93b4d5acfb4b7f9f4e5beacb74e910f"
-            echo "tag: v1.1.1 4833df505a4f95e0213dd9f1ff636e1f36500cea"
+        "log e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --format=format:%D, %H --simplify-by-decoration")
+            echo "master, 3b9fdcac8d57edb8785b8408eb4ffbe10bbef1d9"
+            echo "origin/master, fcfd6fa79d2588039b54c776650a47a0ca8df718"
+            echo "tag: sometag, eb89187b10b70f4f9532d94613cfff01bec3ac33"
+            echo "tag: v1.2.0, 7c72ed06a8e21b2dc2c4a5d6b769ec5686170609"
+            echo "tag: v1.2.0-mybranch.1-2, a0b120b7d93b4d5acfb4b7f9f4e5beacb74e910f"
+            echo "tag: v1.1.1, 4833df505a4f95e0213dd9f1ff636e1f36500cea"
             ;;
         "rev-list 7c72ed06a8e21b2dc2c4a5d6b769ec5686170609..e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --count")
             echo 2

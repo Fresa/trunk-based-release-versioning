@@ -20,9 +20,9 @@ git() {
             ;;
         "rev-parse --verify e0b83ea6577431c046bcb35ba49f8630009cd83c^2")
             ;;
-        "log e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --format=format:%D %H --simplify-by-decoration")
-            echo "master 3b9fdcac8d57edb8785b8408eb4ffbe10bbef1d9"
-            echo "origin/master fcfd6fa79d2588039b54c776650a47a0ca8df718"
+        "log e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --format=format:%D, %H --simplify-by-decoration")
+            echo "master, 3b9fdcac8d57edb8785b8408eb4ffbe10bbef1d9"
+            echo "origin/master, fcfd6fa79d2588039b54c776650a47a0ca8df718"
             ;;
         "rev-list --max-parents=0 master")
             echo "e0b83ea6577431c046bcb35ba49f8630009cd83c"
