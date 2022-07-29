@@ -28,14 +28,18 @@ next_version() {
   echo ${new_version%.}
 }
 
+# Expects git log format "%D, %H"
 get_previous_version_and_release_ref() {
   if test -t 0; then
     echo "No stdin detected"
     exit 1
   fi
   cat < /dev/stdin | \
-    { grep -o 'tag: v[^,)]\+' || test $? = 1; } | \
+    # Split all tags to separate lines
+    awk -F ", " '{for (i=NF-1;i>0;i--) {print $i" "$NF}}' | \
+    # Remove tag prefix
     sed 's/^tag: v//' | \
+    # Remove tags that are not in SemVer format
     { grep '^[0-9]*\.[0-9]*\.[0-9]*[[:space:]]' || test $? = 1; } | \
     head -1 
 }
@@ -74,13 +78,13 @@ else
 fi
 
 # Find any release on the target branch caused by previous merges from current branch
-last_version_and_release_ref=$(git log $to_ref..$default_branch --first-parent --format=format:"%D %H" --simplify-by-decoration --merges | \
+last_version_and_release_ref=$(git log $to_ref..$default_branch --first-parent --format=format:"%D, %H" --simplify-by-decoration --merges | \
   get_previous_version_and_release_ref)
 # No release on target branch found from this branch? Look for last release from current commit
 if [[ -z $last_version_and_release_ref ]]; then
   echo "No release found on target '$default_branch' caused by previous merge"
   # This might go beyond the 'life span' of the current branch as it might have been created from a commit that never ended up being a release
-  last_version_and_release_ref=$(git log $to_ref --first-parent --format=format:"%D %H" --simplify-by-decoration | \
+  last_version_and_release_ref=$(git log $to_ref --first-parent --format=format:"%D, %H" --simplify-by-decoration | \
     get_previous_version_and_release_ref)
   last_release_ref=$(echo "$last_version_and_release_ref" | awk '{print $2}')
   from_ref=$last_release_ref
