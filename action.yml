@@ -34,11 +34,9 @@ outputs:
 runs:
   using: 'composite'
   steps:
-  - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-    shell: bash         
   - id: calc-version
     run: |
-      . ${GITHUB_ACTION_PATH}/src/calc_version.sh
+      . "${GITHUB_ACTION_PATH}/src/calc_version.sh"
       echo "::set-output name=version::$(echo $TBV_VERSION)"
       echo "::set-output name=is-prerelease::$(echo $TBV_IS_PRERELEASE)"
       echo "::set-output name=major-version::$(echo $TBV_MAJOR_VERSION)"
