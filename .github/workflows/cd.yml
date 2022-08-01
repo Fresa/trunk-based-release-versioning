@@ -26,6 +26,8 @@ jobs:
       - name: Determine Release Version
         id: versioning
         uses: ./
+      - name: Test src path
+        uses: Fresa/trunk-based-release-versioning@use-correct-script-path
       - name: Determine Release Tag
         id: release-tag
         run: |
