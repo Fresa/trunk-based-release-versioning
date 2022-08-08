@@ -84,7 +84,7 @@ last_version_and_release_ref=$(git log $to_ref..$default_branch --first-parent -
 if [[ -z $last_version_and_release_ref ]]; then
   echo "No release found on target '$default_branch' caused by previous merge"
   # This might go beyond the 'life span' of the current branch as it might have been created from a commit that never ended up being a release
-  last_version_and_release_ref=$(git log $to_ref --first-parent --format=format:"%D, %H" --simplify-by-decoration | \
+  last_version_and_release_ref=$(git log $to_ref --format=format:"%D, %H" --simplify-by-decoration | \
     get_previous_version_and_release_ref)
   last_release_ref=$(echo "$last_version_and_release_ref" | awk '{print $2}')
   from_ref=$last_release_ref
