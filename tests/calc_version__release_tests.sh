@@ -47,7 +47,7 @@ EOF
             ;;
         "log 7c72ed06a8e21b2dc2c4a5d6b769ec5686170609..master --first-parent --format=format:%D, %H --simplify-by-decoration --merges")
             ;;
-        "log 7c72ed06a8e21b2dc2c4a5d6b769ec5686170609 --first-parent --format=format:%D, %H --simplify-by-decoration")
+        "log 7c72ed06a8e21b2dc2c4a5d6b769ec5686170609 --format=format:%D, %H --simplify-by-decoration")
             echo "master, 3b9fdcac8d57edb8785b8408eb4ffbe10bbef1d9"
             echo "origin/master, fcfd6fa79d2588039b54c776650a47a0ca8df718"
             echo "tag: sometag, eb89187b10b70f4f9532d94613cfff01bec3ac33"
