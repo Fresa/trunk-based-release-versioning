@@ -36,7 +36,7 @@ get_previous_version_and_release_ref() {
   fi
   cat < /dev/stdin | \
     # Split all tags to separate lines
-    awk -F ", " '{for (i=NF-1;i>0;i--) {print $i" "$NF}}' | \
+    awk -F ", " '{for (i=1;i<NF;i++) {print $i" "$NF}}' | \
     # Remove tag prefix
     sed 's/^tag: v//' | \
     # Remove tags that are not in SemVer format

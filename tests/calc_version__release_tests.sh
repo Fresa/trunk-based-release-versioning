@@ -52,7 +52,7 @@ EOF
             echo "origin/master, fcfd6fa79d2588039b54c776650a47a0ca8df718"
             echo "tag: sometag, eb89187b10b70f4f9532d94613cfff01bec3ac33"
             echo "tag: v1.2.1-branch2.1-1, fb89187b10b70f4f9532d94613cfff01bec3ac65"
-            echo "tag: v1.2.0, tag: v1, b0b120b7d93b4d5acfb4b7f9f4e5beacb74e910e"
+            echo "tag: v1.2.0, tag: v1.1.9, tag: v1, b0b120b7d93b4d5acfb4b7f9f4e5beacb74e910e"
             echo "tag: v1.2.0-mybranch.1-2, a0b120b7d93b4d5acfb4b7f9f4e5beacb74e910f"
             echo "tag: v1.1.1, 4833df505a4f95e0213dd9f1ff636e1f36500cea"
             ;;
