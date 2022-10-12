@@ -1,4 +1,6 @@
 #!/bin/bash
+set -o pipefail
+
 next_version() {
   last_version=$1
   if [[ -z $last_version ]]; then
@@ -41,7 +43,11 @@ get_previous_version_and_release_ref() {
     sed 's/^tag: v//' | \
     # Remove tags that are not in SemVer format
     { grep '^[0-9]*\.[0-9]*\.[0-9]*[[:space:]]' || test $? = 1; } | \
-    head -1 
+    # Select first tag. 
+    # Observe that we use sed instead of head as head might 
+    # abruptly kill the pipe which might cause a non-zero exit code for the 
+    # previous command which in turn might fail when pipefail is set
+    sed -n 1p
 }
 
 default_branch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
