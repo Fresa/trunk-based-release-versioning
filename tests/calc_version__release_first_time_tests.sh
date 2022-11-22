@@ -27,7 +27,7 @@ git() {
         "rev-list --max-parents=0 master")
             echo "e0b83ea6577431c046bcb35ba49f8630009cd83c"
             ;;
-        "log e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --pretty=format:hash: %H%nmessage: | %n %s%n%n %b%n---")
+        "log e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --pretty=format:hash: %H%nmessage: | %n%w(0,1,1)%B%w(0,0,0)%n---")
             cat << EOF
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
