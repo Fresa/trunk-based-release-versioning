@@ -54,7 +54,7 @@ default_branch=$(git remote show origin | awk '/HEAD branch/ {print $NF}')
 echo "default branch: $default_branch"
 current_branch=$(git symbolic-ref HEAD | sed 's/refs[/]heads[/]//')
 echo "current branch: $current_branch"
-log_format="hash: %H%nmessage: | %n %s%n%n %b%n---"
+log_format="hash: %H%nmessage: | %n%w(0,1,1)%B%w(0,0,0)%n---"
 release_ref=$(git rev-parse HEAD)
 echo "release reference: $release_ref"
 rm -f tbv_commit_logs.txt

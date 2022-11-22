@@ -20,7 +20,7 @@ git() {
             ;;
         "rev-parse --verify e0b83ea6577431c046bcb35ba49f8630009cd83c^2")
             ;;
-        "log cfdf5c52d1136112d3f067d8044a65f5a143aad5..e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --pretty=format:hash: %H%nmessage: | %n %s%n%n %b%n---")
+        "log cfdf5c52d1136112d3f067d8044a65f5a143aad5..e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --pretty=format:hash: %H%nmessage: | %n%w(0,1,1)%B%w(0,0,0)%n---")
             cat << EOF
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |

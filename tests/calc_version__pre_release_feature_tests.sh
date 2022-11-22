@@ -18,7 +18,7 @@ git() {
         "rev-parse HEAD")
             echo "e0b83ea6577431c046bcb35ba49f8630009cd83c"
             ;;
-        "log 7c72ed06a8e21b2dc2c4a5d6b769ec5686170609..e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --pretty=format:hash: %H%nmessage: | %n %s%n%n %b%n---")
+        "log 7c72ed06a8e21b2dc2c4a5d6b769ec5686170609..e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --pretty=format:hash: %H%nmessage: | %n%w(0,1,1)%B%w(0,0,0)%n---")
             cat << EOF
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
