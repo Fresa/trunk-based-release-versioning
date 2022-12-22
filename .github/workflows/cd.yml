@@ -34,7 +34,7 @@ jobs:
             tag="$tag-pre-$(echo ${{ steps.versioning.outputs.release-ref }} | cut -c1-8)"
           fi
 
-          echo "::set-output name=tag::$tag"
+          echo "tag=$tag" >> $GITHUB_OUTPUT
       - name: Convert Commit Logs to JSON
         id: convert-commit-logs
         uses: mikefarah/yq@v4.25.2
