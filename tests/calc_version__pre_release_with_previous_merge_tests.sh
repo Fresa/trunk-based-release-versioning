@@ -21,7 +21,7 @@ git() {
         "log 8c72ed06a8e21b2dc2c4a5d6b769ec5686170615..e0b83ea6577431c046bcb35ba49f8630009cd83c --first-parent --pretty=format:hash: %H%nmessage: | %n%w(0,1,1)%B%w(0,0,0)%n---")
             echo "hash: e0b83ea6577431c046bcb35ba49f8630009cd83c"
             echo "message: |"
-            echo "  a simple commit message"
+            echo " a simple commit message"
             echo
             echo
             echo "---"
@@ -95,7 +95,7 @@ test_release_notes() {
 "$(cat << EOF 
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
-  a simple commit message
+ a simple commit message
 
 
 ---

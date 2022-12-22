@@ -23,10 +23,11 @@ git() {
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
  feat(foo): a simple commit message
-
+ 
  a body
-
+ 
  BREAKING CHANGE: broke something
+
 ---
 hash: f0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
@@ -101,10 +102,11 @@ test_release_notes() {
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
  feat(foo): a simple commit message
-
+ 
  a body
-
+ 
  BREAKING CHANGE: broke something
+
 ---
 hash: f0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
