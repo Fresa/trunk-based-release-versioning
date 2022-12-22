@@ -3,7 +3,7 @@ name: Continuous Delivery
 on:
   push:
     branches:
-      - '**'
+      - "**"
 
 jobs:
   build:
@@ -42,12 +42,12 @@ jobs:
           cmd: yq ea -o=json 'select(. != null) | [.]' "$(echo "${{ steps.versioning.outputs.commit-logs-path }}" | sed "s|^${{ github.workspace }}/||")" | tee commit_logs.json
       - name: Generate Release Notes
         id: release_notes
-        uses: Fresa/release-notes-generator@v1
+        uses: Fresa/release-notes-generator@v2
         with:
-            version: ${{ steps.release-tag.outputs.tag }}
-            last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
-            release_ref: ${{ steps.versioning.outputs.release-ref }}
-            path_to_commits: ./commit_logs.json
+          version: ${{ steps.release-tag.outputs.tag }}
+          last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
+          release_ref: ${{ steps.versioning.outputs.release-ref }}
+          path_to_commits: ./commit_logs.json
       - name: Create Tag
         uses: actions/github-script@v3
         with:
