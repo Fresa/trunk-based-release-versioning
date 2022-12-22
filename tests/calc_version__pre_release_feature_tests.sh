@@ -22,14 +22,14 @@ git() {
             cat << EOF
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
-    feat(foo): a simple commit message
-
-    a body
+ feat(foo): a simple commit message
+ 
+ a body
 
 ---
 hash: f0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
-    feat(bar): another simple commit message
+ feat(bar): another simple commit message
 
 ---
 EOF
@@ -99,14 +99,14 @@ test_release_notes() {
 "$(cat << EOF 
 hash: e0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
-    feat(foo): a simple commit message
-
-    a body
+ feat(foo): a simple commit message
+ 
+ a body
 
 ---
 hash: f0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
-    feat(bar): another simple commit message
+ feat(bar): another simple commit message
 
 ---
 EOF

@@ -7,24 +7,42 @@ next_version() {
     last_version=0.0.0
   fi
   version_components=(${last_version//./ })
-  commit_messages=$(cat tbv_commit_logs.txt)
 
   # Conventional Commits https://www.conventionalcommits.org/en/v1.0.0/
-  # Major version
-  # https://regex101.com/r/Ms7Vx6/3
-  if [[ $commit_messages =~ (build|chore|ci|doc|feat|fix|perf|refactor|revert|style|test)(\([a-z]+\))?(!:[[:space:]].+|:[[:space:]](.+$'\n\n')+([[:space:]]+)?BREAKING CHANGE:[[:space:]].+) ]]; then
+  version_changes=$(awk '
+    BEGIN{ 
+      RS="\n---\n"; # Let each yaml document be a record
+      FS="\n"; # Let each line be a field
+    } 
+    { 
+      message="";
+      # Remove the first two lines which are the hash and the message properties
+      for(line=3;line<NF;line++) 
+      {
+        # The rest of the lines are the commit message block.
+        # Remove the leading space and aggregate them
+        message=sprintf("%s%s\n", message, substr($line, 2)); 
+      }
+
+      # https://regex101.com/r/Ms7Vx6/4
+      if (match(message, /^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z]+\))?(!:[[:space:]].+|:[[:space:]](.+\n\n)+?BREAKING CHANGE:[[:space:]].+)/) != 0)
+        print "MAJOR" 
+      # https://regex101.com/r/Oqhi2m/5
+      else if (match(message, /^feat(\([a-z]+\))?:[[:space:]].+/) != 0)
+        print "MINOR"
+    }' tbv_commit_logs.txt)
+
+  case $version_changes in
+    *"MAJOR"*)
       version_components[0]=$((version_components[0]+1))
       version_components[1]=0
-      version_components[2]=0
-  # Minor version
-  # https://regex101.com/r/Oqhi2m/4
-  elif [[ $commit_messages =~ feat(\([a-z]+\))?:[[:space:]](.+$'\n\n')+ ]]; then
-    version_components[1]=$((version_components[1]+1))
-    version_components[2]=0
-  # Patch
-  else
-    version_components[2]=$((version_components[2]+1))
-  fi
+      version_components[2]=0;;
+    *"MINOR"*)
+      version_components[1]=$((version_components[1]+1))
+      version_components[2]=0;;
+    *)  # Patch
+      version_components[2]=$((version_components[2]+1));;
+  esac
   
   printf -v new_version "%s." "${version_components[@]}"
   echo ${new_version%.}
