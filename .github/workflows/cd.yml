@@ -3,7 +3,7 @@ name: Continuous Delivery
 on:
   push:
     branches:
-      - '**'
+      - "**"
 
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           # Fetches entire history, so we can analyze commits since last release tag
           fetch-depth: 0
@@ -34,25 +34,25 @@ jobs:
             tag="$tag-pre-$(echo ${{ steps.versioning.outputs.release-ref }} | cut -c1-8)"
           fi
 
-          echo "::set-output name=tag::$tag"
+          echo "tag=$tag" >> $GITHUB_OUTPUT
       - name: Convert Commit Logs to JSON
         id: convert-commit-logs
-        uses: mikefarah/yq@v4.25.2
+        uses: mikefarah/yq@v4.30.6
         with:
           cmd: yq ea -o=json 'select(. != null) | [.]' "$(echo "${{ steps.versioning.outputs.commit-logs-path }}" | sed "s|^${{ github.workspace }}/||")" | tee commit_logs.json
       - name: Generate Release Notes
         id: release_notes
-        uses: Fresa/release-notes-generator@v1
+        uses: Fresa/release-notes-generator@v2
         with:
-            version: ${{ steps.release-tag.outputs.tag }}
-            last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
-            release_ref: ${{ steps.versioning.outputs.release-ref }}
-            path_to_commits: ./commit_logs.json
+          version: ${{ steps.release-tag.outputs.tag }}
+          last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
+          release_ref: ${{ steps.versioning.outputs.release-ref }}
+          path_to_commits: ./commit_logs.json
       - name: Create Tag
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
-            github.git.createRef({
+            github.rest.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: "refs/tags/${{ steps.release-tag.outputs.tag }}",
