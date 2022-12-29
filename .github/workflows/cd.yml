@@ -49,7 +49,7 @@ jobs:
           release_ref: ${{ steps.versioning.outputs.release-ref }}
           path_to_commits: ./commit_logs.json
       - name: Create Tag
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             github.git.createRef({
