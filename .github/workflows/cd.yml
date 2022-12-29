@@ -37,7 +37,7 @@ jobs:
           echo "tag=$tag" >> $GITHUB_OUTPUT
       - name: Convert Commit Logs to JSON
         id: convert-commit-logs
-        uses: mikefarah/yq@v4.25.2
+        uses: mikefarah/yq@v4.30.6
         with:
           cmd: yq ea -o=json 'select(. != null) | [.]' "$(echo "${{ steps.versioning.outputs.commit-logs-path }}" | sed "s|^${{ github.workspace }}/||")" | tee commit_logs.json
       - name: Generate Release Notes
