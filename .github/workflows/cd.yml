@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           # Fetches entire history, so we can analyze commits since last release tag
           fetch-depth: 0
