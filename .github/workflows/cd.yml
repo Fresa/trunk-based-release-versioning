@@ -42,7 +42,7 @@ jobs:
           cmd: yq ea -o=json 'select(. != null) | [.]' "$(echo "${{ steps.versioning.outputs.commit-logs-path }}" | sed "s|^${{ github.workspace }}/||")" | tee commit_logs.json
       - name: Generate Release Notes
         id: release_notes
-        uses: Fresa/release-notes-generator@v2
+        uses: Fresa/release-notes-generator@v2.0.1-pre-3bfcc89b
         with:
           version: ${{ steps.release-tag.outputs.tag }}
           last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
