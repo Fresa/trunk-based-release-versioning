@@ -29,7 +29,7 @@ message: |
 ---
 hash: f0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
- feat(bar): another simple commit message
+ feat(bar fee): another simple commit message
 
 ---
 EOF
@@ -106,7 +106,7 @@ message: |
 ---
 hash: f0b83ea6577431c046bcb35ba49f8630009cd83c
 message: |
- feat(bar): another simple commit message
+ feat(bar fee): another simple commit message
 
 ---
 EOF
