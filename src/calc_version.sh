@@ -24,11 +24,11 @@ next_version() {
         message=sprintf("%s%s\n", message, substr($line, 2)); 
       }
 
-      # https://regex101.com/r/Ms7Vx6/4
-      if (match(message, /^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z]+\))?(!:[[:space:]].+|:[[:space:]](.+\n\n)+?BREAKING CHANGE:[[:space:]].+)/) != 0)
+      # https://regex101.com/r/Ms7Vx6/5
+      if (match(message, /^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-zA-Z0-9[:space:]-]+\))?(!:[[:space:]].+|:[[:space:]](.+\n\n)+?BREAKING CHANGE:[[:space:]].+)/) != 0)
         print "MAJOR" 
-      # https://regex101.com/r/Oqhi2m/5
-      else if (match(message, /^feat(\([a-z]+\))?:[[:space:]].+/) != 0)
+      # https://regex101.com/r/Oqhi2m/9
+      else if (match(message, /^feat(\([a-zA-Z0-9[:space:]-]+\))?:[[:space:]].+/) != 0)
         print "MINOR"
     }' tbv_commit_logs.txt)
 
