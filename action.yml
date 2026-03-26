@@ -31,6 +31,9 @@ outputs:
   last-release-ref:
     description: "The commit SHA to the last release"
     value: ${{ steps.calc-version.outputs.last-release-ref }}
+  last-version:
+    description: "The release tag of the last release"
+    value: ${{ steps.calc-version.outputs.last-version }}
 runs:
   using: "composite"
   steps:
@@ -46,6 +49,7 @@ runs:
         echo "commit-logs-path=$TBV_COMMIT_LOGS_PATH" >> $GITHUB_OUTPUT
         echo "release-ref=$TBV_RELEASE_REF" >> $GITHUB_OUTPUT
         echo "last-release-ref=$TBV_LAST_RELEASE_REF" >> $GITHUB_OUTPUT
+        echo "last-version=$TBV_LAST_VERSION" >> $GITHUB_OUTPUT
       shell: bash
 branding:
   icon: "tag"

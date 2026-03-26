@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           # Fetches entire history, so we can analyze commits since last release tag
           fetch-depth: 0
@@ -26,6 +26,18 @@ jobs:
       - name: Determine Release Version
         id: versioning
         uses: ./
+      - name: Release Version Output
+        run: |
+          echo "version=${{ steps.versioning.outputs.version }}"
+          echo "major-version=${{ steps.versioning.outputs.major-version }}"
+          echo "minor-version=${{ steps.versioning.outputs.minor-version }}"
+          echo "patch-version=${{ steps.versioning.outputs.patch-version }}"
+          echo "is-prerelease=${{ steps.versioning.outputs.is-prerelease }}"
+          echo "commit-count=${{ steps.versioning.outputs.commit-count }}"
+          echo "commit-logs-path=${{ steps.versioning.outputs.commit-logs-path }}"
+          echo "release-ref=${{ steps.versioning.outputs.release-ref }}"
+          echo "last-release-ref=${{ steps.versioning.outputs.last-release-ref }}"
+          echo "last-version=${{ steps.versioning.outputs.last-version }}"
       - name: Determine Release Tag
         id: release-tag
         run: |
@@ -42,14 +54,14 @@ jobs:
           cmd: yq ea -o=json 'select(. != null) | [.]' "$(echo "${{ steps.versioning.outputs.commit-logs-path }}" | sed "s|^${{ github.workspace }}/||")" | tee commit_logs.json
       - name: Generate Release Notes
         id: release_notes
-        uses: Fresa/release-notes-generator@v2
+        uses: Fresa/release-notes-generator@v4
         with:
           version: ${{ steps.release-tag.outputs.tag }}
           last_release_ref: ${{ steps.versioning.outputs.last-release-ref }}
           release_ref: ${{ steps.versioning.outputs.release-ref }}
           path_to_commits: ./commit_logs.json
       - name: Create Tag
-        uses: actions/github-script@v6
+        uses: actions/github-script@v8
         with:
           script: |
             github.rest.git.createRef({
@@ -59,7 +71,7 @@ jobs:
               sha: "${{ steps.versioning.outputs.release-ref }}"
             });
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           body: ${{ steps.release_notes.outputs.release_notes }}
           tag_name: ${{ steps.release-tag.outputs.tag }}
