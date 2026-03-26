@@ -26,6 +26,18 @@ jobs:
       - name: Determine Release Version
         id: versioning
         uses: ./
+      - name: Release Version Output
+        run: |
+          echo "version=${{ steps.versioning.outputs.version }}"
+          echo "major-version=${{ steps.versioning.outputs.major-version }}"
+          echo "minor-version=${{ steps.versioning.outputs.minor-version }}"
+          echo "patch-version=${{ steps.versioning.outputs.patch-version }}"
+          echo "is-prerelease=${{ steps.versioning.outputs.is-prerelease }}"
+          echo "commit-count=${{ steps.versioning.outputs.commit-count }}"
+          echo "commit-logs-path=${{ steps.versioning.outputs.commit-logs-path }}"
+          echo "release-ref=${{ steps.versioning.outputs.release-ref }}"
+          echo "last-release-ref=${{ steps.versioning.outputs.last-release-ref }}"
+          echo "last-version=${{ steps.versioning.outputs.last-version }}"
       - name: Determine Release Tag
         id: release-tag
         run: |
